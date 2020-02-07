@@ -333,8 +333,6 @@ public class MyVentana implements ActionListener{
 			}
 		}
 		this.dibujo.repaint();
-		this.btk.imprimeTablero();
-		System.out.println();
 	}
 
 
@@ -822,7 +820,6 @@ public class MyVentana implements ActionListener{
 					String linea = br.readLine();
 					if(linea !=null) {
 						auxArray = linea.split(",");
-						//System.out.println("Leer " + auxArray[0] + "," + auxArray[1]);
 						MyNodoHeap nodo = new MyNodoHeap(Integer.parseInt(auxArray[0]), auxArray[1]);
 						this.heap.push(nodo);
 					}
@@ -838,7 +835,6 @@ public class MyVentana implements ActionListener{
 				this.fw = new FileWriter("Datos.txt");
 				this.bw = new BufferedWriter(fw);
 				for (int i = 0; i < 10; i++) {
-					//System.out.println("Escribir "+this.aux_before_file[i][0] +"," + this.aux_before_file[i][1] );
 					bw.write(this.aux_before_file[i][0] +"," + this.aux_before_file[i][1] );
 					bw.write("\n");
 				}
