@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -56,27 +57,27 @@ public class MyVentana implements ActionListener{
 	lbRank9,
 	lbRank10,
 	lbScore0,
-	lbScore1,
-	lbScore2,
-	lbScore3,
-	lbScore4,
-	lbScore5,
-	lbScore6,
-	lbScore7,
-	lbScore8,
-	lbScore9,
-	lbScore10,
+	lbScore1 = new JLabel("0"),
+	lbScore2 = new JLabel("0"),
+	lbScore3 = new JLabel("0"),
+	lbScore4 = new JLabel("0"),
+	lbScore5 = new JLabel("0"),
+	lbScore6 = new JLabel("0"),
+	lbScore7 = new JLabel("0"),
+	lbScore8 = new JLabel("0"),
+	lbScore9 = new JLabel("0"),
+	lbScore10 = new JLabel("0"),
 	lbName,
-	lbName1,
-	lbName2,
-	lbName3,
-	lbName4,
-	lbName5,
-	lbName6,
-	lbName7,
-	lbName8,
-	lbName9,
-	lbName10,
+	lbName1 = new JLabel("-"),
+	lbName2 = new JLabel("-"),
+	lbName3 = new JLabel("-"),
+	lbName4 = new JLabel("-"),
+	lbName5 = new JLabel("-"),
+	lbName6 = new JLabel("-"),
+	lbName7 = new JLabel("-"),
+	lbName8 = new JLabel("-"),
+	lbName9 = new JLabel("-"),
+	lbName10 = new JLabel("-"),
 	lbover,
 	lbingresa,
 	lbPuntajeFinal;
@@ -95,7 +96,6 @@ public class MyVentana implements ActionListener{
 	private FileWriter fw = null;
 	private BufferedWriter bw = null;
 	private String[][] aux_before_file = new String[10][2];
-	private boolean bandera_scores= false;
 
 	//Frame Ventana___________________________________________________________________________________________________________________________________________________________
 	public void crearVentana(){
@@ -362,138 +362,6 @@ public class MyVentana implements ActionListener{
 		this.ventana.add(gameOver);
 		this.gameOver.setVisible(true);
 	}
-	//SetScores
-
-	public void setScoresLoser(){
-		MyNodoHeap nodo = new MyNodoHeap(this.btk.getPuntos(), this.nombreJugador);
-		this.heap.push(nodo);
-		leerArchivo();
-
-	}
-	public void setScores() {
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName1.setText(aux.name);
-			this.lbScore1.setText(Integer.toString(aux.score));
-			aux_before_file[0][0] = Integer.toString(aux.score);
-			aux_before_file[0][1] = aux.name;
-
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName2.setText(aux.name);
-			this.lbScore2.setText(Integer.toString(aux.score));
-			aux_before_file[1][0] = Integer.toString(aux.score);
-			aux_before_file[1][1] = aux.name;
-
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName3.setText(aux.name);
-			this.lbScore3.setText(Integer.toString(aux.score));
-			aux_before_file[2][0] = Integer.toString(aux.score);
-			aux_before_file[2][1] = aux.name;
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName4.setText(aux.name);
-			this.lbScore4.setText(Integer.toString(aux.score));
-			aux_before_file[3][0] = Integer.toString(aux.score);
-			aux_before_file[3][1] = aux.name;
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName5.setText(aux.name);
-			this.lbScore5.setText(Integer.toString(aux.score));
-			aux_before_file[4][0] = Integer.toString(aux.score);
-			aux_before_file[4][1] = aux.name;
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName6.setText(aux.name);
-			this.lbScore6.setText(Integer.toString(aux.score));
-			aux_before_file[5][0] = Integer.toString(aux.score);
-			aux_before_file[5][1] = aux.name;
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName7.setText(aux.name);
-			this.lbScore7.setText(Integer.toString(aux.score));
-			aux_before_file[6][0] = Integer.toString(aux.score);
-			aux_before_file[6][1] = aux.name;
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName8.setText(aux.name);
-			this.lbScore8.setText(Integer.toString(aux.score));
-			aux_before_file[7][0] = Integer.toString(aux.score);
-			aux_before_file[7][1] = aux.name;
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName9.setText(aux.name);
-			this.lbScore9.setText(Integer.toString(aux.score));
-			aux_before_file[8][0] = Integer.toString(aux.score);
-			aux_before_file[8][1] = aux.name;
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName10.setText(aux.name);
-			this.lbScore10.setText(Integer.toString(aux.score));
-			aux_before_file[9][0] = Integer.toString(aux.score);
-			aux_before_file[9][1] = aux.name;
-		}
-		escribirEnArchivo();
-		try {
-			bw.close();
-			fw.close();
-		}catch(IOException e) {
-
-		}
-
-	}
-
-
-
-	public void leerArchivo() {
-		try {	
-			FileReader fr = new FileReader("Datos.txt");   
-			BufferedReader br = new BufferedReader(fr);
-			String[] auxArray = new String[2];
-
-			for(int i=0; i<11; i++) {
-				auxArray = br.readLine().split(",");
-				MyNodoHeap nodo = new MyNodoHeap(Integer.parseInt(auxArray[0]), auxArray[1]);
-				this.heap.push(nodo);
-			}
-		}catch(Exception err){
-			System.out.println("err--------------");
-		}
-	}
-
-	public void escribirEnArchivo() {
-
-		try {
-			this.fw = new FileWriter("Datos.txt");
-			this.bw = new BufferedWriter(fw);
-			for (int i = 0; i < 10; i++) {
-				bw.write(this.aux_before_file[i][0] +"," + this.aux_before_file[i][1] );
-				bw.write("\n");
-			}
-		}catch(Exception err){
-			System.out.println("err--------------");
-		}
-	}
-
 
 
 	//Panel Controles_______________________________________________________________________________________________________________________________________________________________
@@ -759,147 +627,103 @@ public class MyVentana implements ActionListener{
 		this.lbScore0.setFont(new Font("arial", Font.PLAIN, 30));
 		this.lbScore0.setBounds(450,135,120,60);                         
 
-		this.aux = heap.pop();
-		
-		this.lbScore1 = new JLabel(""+this.aux.score); 
 		this.lbScore1.setOpaque(true);
 		this.lbScore1.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore1.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore1.setBounds(450,210,120,30);
 
-		this.lbName1 = new JLabel(this.aux.name);
 		this.lbName1.setOpaque(true);
 		this.lbName1.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName1.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName1.setBounds(725,210,120,30);
 
-		this.aux = heap.pop();
-		
-		this.lbScore2 = new JLabel(Integer.toString(this.aux.score)); 
 		this.lbScore2.setOpaque(true);
 		this.lbScore2.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore2.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore2.setBounds(450,250,120,30);
 
-		this.lbName2 = new JLabel(this.aux.name);
 		this.lbName2.setOpaque(true);
 		this.lbName2.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName2.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName2.setBounds(725,250,120,30);
 
-		this.aux = heap.pop();
-	
-		this.lbScore3 = new JLabel(Integer.toString(this.aux.score)); 
 		this.lbScore3.setOpaque(true);
 		this.lbScore3.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore3.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore3.setBounds(450,290,120,30);
 
-		this.lbName3 = new JLabel(this.aux.name);
 		this.lbName3.setOpaque(true);
 		this.lbName3.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName3.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName3.setBounds(725,290,120,30);
 
-		this.aux = heap.pop();
-	
-		this.lbScore4 = new JLabel(Integer.toString(this.aux.score)); 
 		this.lbScore4.setOpaque(true);
 		this.lbScore4.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore4.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore4.setBounds(450,330,120,30);
 
-
-		this.lbName4 = new JLabel(this.aux.name);
 		this.lbName4.setOpaque(true);
 		this.lbName4.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName4.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName4.setBounds(725,330,120,30);
-
-		this.aux = heap.pop();
-		
-		this.lbScore5 = new JLabel(Integer.toString(this.aux.score)); 
+ 
 		this.lbScore5.setOpaque(true);
 		this.lbScore5.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore5.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore5.setBounds(450,370,120,30);
 
-
-		this.lbName5 = new JLabel(this.aux.name);
 		this.lbName5.setOpaque(true);
 		this.lbName5.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName5.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName5.setBounds(725,370,120,30);
 
-		this.aux = heap.pop();
-	
-		this.lbScore6 = new JLabel(Integer.toString(this.aux.score)); 
 		this.lbScore6.setOpaque(true);
 		this.lbScore6.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore6.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore6.setBounds(450,410,120,30);
 
-		this.lbName6 = new JLabel(this.aux.name);
 		this.lbName6.setOpaque(true);
 		this.lbName6.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName6.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName6.setBounds(725,410,120,30);
 
-		this.aux = heap.pop();
-		
-		this.lbScore7 = new JLabel(Integer.toString(this.aux.score)); 
 		this.lbScore7.setOpaque(true);
 		this.lbScore7.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore7.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore7.setBounds(450,450,120,30);
 
-		this.lbName7 = new JLabel(this.aux.name);
 		this.lbName7.setOpaque(true);
 		this.lbName7.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName7.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName7.setBounds(725,450,120,30);
 
-
-		this.aux = heap.pop();
-
-		this.lbScore8 = new JLabel(Integer.toString(this.aux.score)); 
 		this.lbScore8.setOpaque(true);
 		this.lbScore8.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore8.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore8.setBounds(450,490,120,30);
 
-
-		this.lbName8 = new JLabel(this.aux.name);
 		this.lbName8.setOpaque(true);
 		this.lbName8.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName8.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName8.setBounds(725,490,120,30);
 
 
-		this.aux = heap.pop();
-	
-		this.lbScore9 = new JLabel(Integer.toString(this.aux.score)); 
 		this.lbScore9.setOpaque(true);
 		this.lbScore9.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore9.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore9.setBounds(450,530,120,30);
 
 
-		this.lbName9 = new JLabel(this.aux.name);
 		this.lbName9.setOpaque(true);
 		this.lbName9.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName9.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName9.setBounds(725,530,120,30);
 
-		this.aux = heap.pop();
-	
-		this.lbScore10 = new JLabel(Integer.toString(this.aux.score)); 
 		this.lbScore10.setOpaque(true);
 		this.lbScore10.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore10.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore10.setBounds(450,570,120,30);
 
-		this.lbName10 = new JLabel(this.aux.name);
 		this.lbName10.setOpaque(true);
 		this.lbName10.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName10.setFont(new Font("arial", Font.PLAIN, 20));
@@ -962,7 +786,145 @@ public class MyVentana implements ActionListener{
 	}
 
 
-	//My Panel Game Over
+	public void leerArchivo() {
+		try {	
+			File newFile = new File("Datos.txt");
+			FileReader fr = new FileReader(newFile);   
+			BufferedReader br = new BufferedReader(fr);
+			String[] auxArray = new String[2];
+
+			for(int i=0; i<11; i++) {
+				String linea = br.readLine();
+				if(linea !=null) {
+					auxArray = linea.split(",");
+					//System.out.println("Leer " + auxArray[0] + "," + auxArray[1]);
+					MyNodoHeap nodo = new MyNodoHeap(Integer.parseInt(auxArray[0]), auxArray[1]);
+					this.heap.push(nodo);
+				}
+				
+
+		}
+	}catch(Exception err){
+		System.out.println("err--------------");
+	}
+}
+
+	public void escribirEnArchivo() {
+		try {
+			this.fw = new FileWriter("Datos.txt");
+			this.bw = new BufferedWriter(fw);
+			for (int i = 0; i < 10; i++) {
+				//System.out.println("Escribir "+this.aux_before_file[i][0] +"," + this.aux_before_file[i][1] );
+				bw.write(this.aux_before_file[i][0] +"," + this.aux_before_file[i][1] );
+				bw.write("\n");
+			}
+		}catch(Exception err){
+			System.out.println("err--------------");
+		}
+	}
+
+	//SetScores
+	public void setScoresLoser(){
+		MyNodoHeap nodo = new MyNodoHeap(this.btk.getPuntos(), this.nombreJugador);
+		this.heap.push(nodo);
+		this.leerArchivo();
+	}
+	public void setScores() {
+		this.aux = heap.pop();
+		if(this.aux != null) {
+			this.lbName1.setText(this.aux.name);
+			this.lbScore1.setText(Integer.toString(this.aux.score));
+			aux_before_file[0][0] = Integer.toString(this.aux.score);
+			aux_before_file[0][1] = this.aux.name;
+
+		}
+
+		this.aux = heap.pop();
+		if(this.aux != null) {
+			this.lbName2.setText(this.aux.name);
+			this.lbScore2.setText(Integer.toString(this.aux.score));
+			aux_before_file[1][0] = Integer.toString(this.aux.score);
+			aux_before_file[1][1] = this.aux.name;
+
+		}
+
+		this.aux = heap.pop();
+		if(this.aux != null) {
+			this.lbName3.setText(aux.name);
+			this.lbScore3.setText(Integer.toString(aux.score));
+			aux_before_file[2][0] = Integer.toString(aux.score);
+			aux_before_file[2][1] = aux.name;
+		}
+
+		this.aux = heap.pop();
+		if(this.aux != null) {
+			this.lbName4.setText(aux.name);
+			this.lbScore4.setText(Integer.toString(aux.score));
+			aux_before_file[3][0] = Integer.toString(aux.score);
+			aux_before_file[3][1] = aux.name;
+		}
+
+		this.aux = heap.pop();
+		if(this.aux != null) {
+			this.lbName5.setText(aux.name);
+			this.lbScore5.setText(Integer.toString(aux.score));
+			aux_before_file[4][0] = Integer.toString(aux.score);
+			aux_before_file[4][1] = aux.name;
+		}
+
+		this.aux = heap.pop();
+		if(this.aux != null) {
+			this.lbName6.setText(aux.name);
+			this.lbScore6.setText(Integer.toString(aux.score));
+			aux_before_file[5][0] = Integer.toString(aux.score);
+			aux_before_file[5][1] = aux.name;
+		}
+
+		this.aux = heap.pop();
+		if(this.aux != null) {
+			this.lbName7.setText(aux.name);
+			this.lbScore7.setText(Integer.toString(aux.score));
+			aux_before_file[6][0] = Integer.toString(aux.score);
+			aux_before_file[6][1] = aux.name;
+		}
+
+		this.aux = heap.pop();
+		if(this.aux != null) {
+			this.lbName8.setText(aux.name);
+			this.lbScore8.setText(Integer.toString(aux.score));
+			aux_before_file[7][0] = Integer.toString(aux.score);
+			aux_before_file[7][1] = aux.name;
+		}
+
+		this.aux = heap.pop();
+		if(this.aux != null) {
+			this.lbName9.setText(aux.name);
+			this.lbScore9.setText(Integer.toString(aux.score));
+			aux_before_file[8][0] = Integer.toString(aux.score);
+			aux_before_file[8][1] = aux.name;
+		}
+
+		this.aux = heap.pop();
+		if(this.aux != null) {
+			this.lbName10.setText(aux.name);
+			this.lbScore10.setText(Integer.toString(aux.score));
+			aux_before_file[9][0] = Integer.toString(aux.score);
+			aux_before_file[9][1] = aux.name;
+		}
+		this.escribirEnArchivo();
+		try {
+			bw.close();
+			fw.close();
+		}catch(IOException e) {
+
+		}
+	}
+
+
+
+
+
+	//My Panel Game Over_____________________________________________________________________________________________
 	public void crearGameOver(){
 		this.gameOver = new JPanel();
 		this.gameOver.setLayout(null);
@@ -1034,21 +996,7 @@ public class MyVentana implements ActionListener{
 			this.menu.setVisible(true);
 		}
 
-		//Score
-		if(e.getSource() == this.btnScores){
-			this.menu.setVisible(false);
-			this.leerArchivo();
-			this.crearScore();
-			ventana.add(this.score);
-			this.score.setVisible(true);
-			bandera_scores = true;
-		}
 
-		//Score
-		if(e.getSource() == this.btnAtrasScore){
-			this.menu.setVisible(true);
-			this.score.setVisible(false);
-		}
 
 		//Juego nuevo
 		if(e.getSource() == this.btnJuegoNuevo){
@@ -1059,29 +1007,39 @@ public class MyVentana implements ActionListener{
 			this.ventana.add(controles, BorderLayout.WEST);
 			this.dibujo.setVisible(true);
 			this.controles.setVisible(true);
-			this.leerArchivo();
-			this.crearScore();
+			
 		}
 
 		//Game Over
 		if(e.getSource() == this.btnName){
 			this.gameOver.setVisible(false);
 			this.nombreJugador = this.tfName.getText();
-			System.out.println("puntos: " + this.btk.getPuntos() + " name: " + this.tfName.getText() );
 			this.setScoresLoser();
-			setScores();
-
-
-			ventana.add(this.score);
+			this.setScores();
+			this.crearScore();
+			this.ventana.add(this.score);
 			this.score.setVisible(true);
 			this.timer.stop();
 			this.milisegundos = 0;
 			this.segundos = 0;
 			this.minutos = 10;
 			this.lbTiempoNum.setText(formatoTiempo.format(minutos) + ":"+ formatoTiempo.format(segundos) + "."+ formatoTiempo.format(milisegundos));
+		}
 
+		//Score
+		if(e.getSource() == this.btnScores){
+			this.menu.setVisible(false);
+			this.leerArchivo();
+			this.setScores();
+			this.crearScore();
+			this.ventana.add(this.score);
+			this.score.setVisible(true);
+		}
 
-
+		//Score
+		if(e.getSource() == this.btnAtrasScore){
+			this.menu.setVisible(true);
+			this.score.setVisible(false);
 		}
 
 		if(this.rbtnCentro.isSelected()){

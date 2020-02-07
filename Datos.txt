@@ -1,10 +1,10 @@
+7381,alkma
+536,linda
 500,Jugador_1
 400,Jugador_2
 300,Jugador_3
 200,Jugador_4
+108,oscar
 100,Jugador_5
-69,alma
 50,Jugador_6
-28,Oscar
 25,Jugador_7
-12,Jugador_8
