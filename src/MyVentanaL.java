@@ -2,17 +2,12 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.DecimalFormat;
 
 import javax.swing.*;
 
 
-public class MyVentana implements ActionListener{
+public class MyVentanaL implements ActionListener{
 	JFrame ventana;
 	JPanel menu,ins,dibujo,controles,score,gameOver;
 	private Backtracking btk;
@@ -89,12 +84,7 @@ public class MyVentana implements ActionListener{
 	private DecimalFormat formatoTiempo;
 	private Timer timer;
 
-	private String nombreJugador = "";
-	private MyHeap heap = new MyHeap();
-	private MyNodoHeap aux;
-	private FileWriter fw = null;
-	private BufferedWriter bw = null;
-	private String[][] aux_before_file = new String[10][2];
+	MyHeap heap = new MyHeap();
 
 	//Frame Ventana___________________________________________________________________________________________________________________________________________________________
 	public void crearVentana(){
@@ -360,134 +350,106 @@ public class MyVentana implements ActionListener{
 		this.crearGameOver();
 		this.ventana.add(gameOver);
 		this.gameOver.setVisible(true);
-	}
-	//SetScores
 	
-	public void setScoresLoser() throws IOException {
-		MyNodoHeap nodo = new MyNodoHeap(this.btk.getPuntos(), this.nombreJugador);
-		this.heap.push(nodo);
-		leerArchivo();
-		setScores();
-	}
-	public void setScores() throws IOException {
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName1.setText(aux.name);
-			this.lbScore1.setText(Integer.toString(aux.score));
-			aux_before_file[0][0] = Integer.toString(aux.score);
-			aux_before_file[0][1] = aux.name;
-			
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName2.setText(aux.name);
-			this.lbScore2.setText(Integer.toString(aux.score));
-			aux_before_file[1][0] = Integer.toString(aux.score);
-			aux_before_file[1][1] = aux.name;
-			
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName3.setText(aux.name);
-			this.lbScore3.setText(Integer.toString(aux.score));
-			aux_before_file[2][0] = Integer.toString(aux.score);
-			aux_before_file[2][1] = aux.name;
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName4.setText(aux.name);
-			this.lbScore4.setText(Integer.toString(aux.score));
-			aux_before_file[3][0] = Integer.toString(aux.score);
-			aux_before_file[3][1] = aux.name;
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName5.setText(aux.name);
-			this.lbScore5.setText(Integer.toString(aux.score));
-			aux_before_file[4][0] = Integer.toString(aux.score);
-			aux_before_file[4][1] = aux.name;
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName6.setText(aux.name);
-			this.lbScore6.setText(Integer.toString(aux.score));
-			aux_before_file[5][0] = Integer.toString(aux.score);
-			aux_before_file[5][1] = aux.name;
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName7.setText(aux.name);
-			this.lbScore7.setText(Integer.toString(aux.score));
-			aux_before_file[6][0] = Integer.toString(aux.score);
-			aux_before_file[6][1] = aux.name;
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName8.setText(aux.name);
-			this.lbScore8.setText(Integer.toString(aux.score));
-			aux_before_file[7][0] = Integer.toString(aux.score);
-			aux_before_file[7][1] = aux.name;
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName9.setText(aux.name);
-			this.lbScore9.setText(Integer.toString(aux.score));
-			aux_before_file[8][0] = Integer.toString(aux.score);
-			aux_before_file[8][1] = aux.name;
-		}
-
-		this.aux = heap.pop();
-		if(this.aux != null) {
-			this.lbName10.setText(aux.name);
-			this.lbScore10.setText(Integer.toString(aux.score));
-			aux_before_file[9][0] = Integer.toString(aux.score);
-			aux_before_file[9][1] = aux.name;
-		}
-		escribirEnArchivo();
-		bw.close();
-		fw.close();
-	}
-
-
-
-	public void leerArchivo() {
-		try {	
-			FileReader fr = new FileReader("Datos.txt");   
-			BufferedReader br = new BufferedReader(fr);
-			String[] auxArray = new String[2];
-
-			for(int i=0; i<11; i++) {
-				auxArray = br.readLine().split(",");
-				MyNodoHeap nodo = new MyNodoHeap(Integer.parseInt(auxArray[0]), auxArray[1]);
-				this.heap.push(nodo);
-			}
-		}catch(Exception err){
-			System.out.println("err--------------");
-		}
-	}
-
-	public void escribirEnArchivo() {
 		
-		try {
-			this.fw = new FileWriter("Datos.txt");
-			this.bw = new BufferedWriter(fw);
-			for (int i = 0; i < 10; i++) {
-				bw.write(this.aux_before_file[i][0] +"," + this.aux_before_file[i][1] );
-				bw.write("\n");
-			}
-		}catch(Exception err){
-			System.out.println("err--------------");
+		MyNodoHeap aux;
+		//heap.push(, n);
+
+
+		if(lbScore1.getText() != null) {
+			heap.push(Integer.parseInt(lbScore1.getText()), lbName1.getText());
+		}
+		if(lbScore2.getText() != null) {
+			heap.push(Integer.parseInt(lbScore2.getText()), lbName2.getText());
+		}
+		if(lbScore3.getText() != null) {
+			heap.push(Integer.parseInt(lbScore3.getText()), lbName3.getText());
+		}
+		if(lbScore4.getText() != null) {
+			heap.push(Integer.parseInt(lbScore4.getText()), lbName4.getText());
+		}
+		if(lbScore5.getText() != null) {
+			heap.push(Integer.parseInt(lbScore5.getText()), lbName5.getText());
+		}
+		if(lbScore6.getText() != null) {
+			heap.push(Integer.parseInt(lbScore6.getText()), lbName6.getText());
+		}
+		if(lbScore7.getText() != null) {
+			heap.push(Integer.parseInt(lbScore7.getText()), lbName7.getText());
+		}
+		if(lbScore8.getText() != null) {
+			heap.push(Integer.parseInt(lbScore8.getText()), lbName8.getText());
+		}
+		if(lbScore9.getText() != null) {
+			heap.push(Integer.parseInt(lbScore9.getText()), lbName9.getText());
+		}
+		if(lbScore10.getText() != null) {
+			heap.push(Integer.parseInt(lbScore10.getText()),lbName10.getText());
+		}
+
+		//-----------------------------------------------------------------------------------------
+
+
+		if(heap.heap[0].score > 0) {
+			aux = heap.pop();
+			lbName1.setText(aux.name);
+			lbScore1.setText(Integer.toString(aux.score));
+		}
+
+		if(heap.heap[0].score > 0) {
+			aux = heap.pop();
+			lbName2.setText(aux.name);
+			lbScore2.setText(Integer.toString(aux.score));
+		}
+
+		if(heap.heap[0].score > 0) {
+			aux = heap.pop();
+			lbName3.setText(aux.name);
+			lbScore3.setText(Integer.toString(aux.score));
+		}
+
+		if(heap.heap[0].score > 0) {
+			aux = heap.pop();
+			lbName4.setText(aux.name);
+			lbScore4.setText(Integer.toString(aux.score));
+		}
+
+		if(heap.heap[0].score > 0) {
+			aux = heap.pop();
+			lbName5.setText(aux.name);
+			lbScore5.setText(Integer.toString(aux.score));
+		}
+
+		if(heap.heap[0].score > 0) {
+			aux = heap.pop();
+			lbName6.setText(aux.name);
+			lbScore6.setText(Integer.toString(aux.score));
+		}
+
+		if(heap.heap[0].score > 0) {
+			aux = heap.pop();
+			lbName7.setText(aux.name);
+			lbScore7.setText(Integer.toString(aux.score));
+		}
+
+		if(heap.heap[0].score > 0) {
+			aux = heap.pop();
+			lbName8.setText(aux.name);
+			lbScore8.setText(Integer.toString(aux.score));
+		}
+
+		if(heap.heap[0].score > 0) {
+			aux = heap.pop();
+			lbName9.setText(aux.name);
+			lbScore9.setText(Integer.toString(aux.score));
+		}
+
+		if(heap.heap[0].score > 0) {
+			aux = heap.pop();
+			lbName10.setText(aux.name);
+			lbScore10.setText(Integer.toString(aux.score));
 		}
 	}
-
 
 
 	//Panel Controles_______________________________________________________________________________________________________________________________________________________________
@@ -753,61 +715,61 @@ public class MyVentana implements ActionListener{
 		this.lbScore0.setFont(new Font("arial", Font.PLAIN, 30));
 		this.lbScore0.setBounds(450,135,120,60);                         
 
-		this.lbScore1 = new JLabel(""); 
+		this.lbScore1 = new JLabel("9000"); 
 		this.lbScore1.setOpaque(true);
 		this.lbScore1.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore1.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore1.setBounds(450,210,120,30);
 
-		this.lbScore2 = new JLabel("");
+		this.lbScore2 = new JLabel("8000");
 		this.lbScore2.setOpaque(true);
 		this.lbScore2.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore2.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore2.setBounds(450,250,120,30);
 
-		this.lbScore3 = new JLabel("");
+		this.lbScore3 = new JLabel("7000");
 		this.lbScore3.setOpaque(true);
 		this.lbScore3.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore3.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore3.setBounds(450,290,120,30);
 
-		this.lbScore4 = new JLabel("");
+		this.lbScore4 = new JLabel("6000");
 		this.lbScore4.setOpaque(true);
 		this.lbScore4.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore4.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore4.setBounds(450,330,120,30);
 
-		this.lbScore5 = new JLabel("");
+		this.lbScore5 = new JLabel("5000");
 		this.lbScore5.setOpaque(true);
 		this.lbScore5.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore5.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore5.setBounds(450,370,120,30);
 
-		this.lbScore6 = new JLabel("");
+		this.lbScore6 = new JLabel("4000");
 		this.lbScore6.setOpaque(true);
 		this.lbScore6.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore6.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore6.setBounds(450,410,120,30);
 
-		this.lbScore7 = new JLabel("");
+		this.lbScore7 = new JLabel("3000");
 		this.lbScore7.setOpaque(true);
 		this.lbScore7.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore7.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore7.setBounds(450,450,120,30);
 
-		this.lbScore8 = new JLabel("");
+		this.lbScore8 = new JLabel("2000");
 		this.lbScore8.setOpaque(true);
 		this.lbScore8.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore8.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore8.setBounds(450,490,120,30);
 
-		this.lbScore9 = new JLabel("");
+		this.lbScore9 = new JLabel("1000");
 		this.lbScore9.setOpaque(true);
 		this.lbScore9.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore9.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbScore9.setBounds(450,530,120,30);
 
-		this.lbScore10 = new JLabel("");
+		this.lbScore10 = new JLabel("500");
 		this.lbScore10.setOpaque(true);
 		this.lbScore10.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbScore10.setFont(new Font("arial", Font.PLAIN, 20));
@@ -819,61 +781,61 @@ public class MyVentana implements ActionListener{
 		this.lbName.setFont(new Font("arial", Font.PLAIN, 30));
 		this.lbName.setBounds(725,135,120,60);                              
 
-		this.lbName1 = new JLabel();
+		this.lbName1 = new JLabel("OSCAR");
 		this.lbName1.setOpaque(true);
 		this.lbName1.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName1.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName1.setBounds(725,210,120,30);
 
-		this.lbName2 = new JLabel();
+		this.lbName2 = new JLabel("ALMA");
 		this.lbName2.setOpaque(true);
 		this.lbName2.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName2.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName2.setBounds(725,250,120,30);
 
-		this.lbName3 = new JLabel();
+		this.lbName3 = new JLabel("RICK");
 		this.lbName3.setOpaque(true);
 		this.lbName3.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName3.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName3.setBounds(725,290,120,30);
 
-		this.lbName4 = new JLabel();
+		this.lbName4 = new JLabel("RAUL");
 		this.lbName4.setOpaque(true);
 		this.lbName4.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName4.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName4.setBounds(725,330,120,30);
 
-		this.lbName5 = new JLabel();
+		this.lbName5 = new JLabel("MONSE");
 		this.lbName5.setOpaque(true);
 		this.lbName5.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName5.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName5.setBounds(725,370,120,30);
 
-		this.lbName6 = new JLabel();
+		this.lbName6 = new JLabel("PINKY");
 		this.lbName6.setOpaque(true);
 		this.lbName6.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName6.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName6.setBounds(725,410,120,30);
 
-		this.lbName7 = new JLabel();
+		this.lbName7 = new JLabel("VALEN");
 		this.lbName7.setOpaque(true);
 		this.lbName7.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName7.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName7.setBounds(725,450,120,30);
 
-		this.lbName8 = new JLabel();
+		this.lbName8 = new JLabel("CANDY");
 		this.lbName8.setOpaque(true);
 		this.lbName8.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName8.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName8.setBounds(725,490,120,30);
 
-		this.lbName9 = new JLabel();
+		this.lbName9 = new JLabel("MARIA");
 		this.lbName9.setOpaque(true);
 		this.lbName9.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName9.setFont(new Font("arial", Font.PLAIN, 20));
 		this.lbName9.setBounds(725,530,120,30);
 
-		this.lbName10 = new JLabel();
+		this.lbName10 = new JLabel("OSCAF");
 		this.lbName10.setOpaque(true);
 		this.lbName10.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbName10.setFont(new Font("arial", Font.PLAIN, 20));
@@ -941,7 +903,7 @@ public class MyVentana implements ActionListener{
 		this.lbover.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lbover.setFont(new Font("Impact", Font.PLAIN, 50));
 		this.lbover.setBounds(200,50,600,60);
-
+		
 		this.lbingresa = new JLabel("Ingrese un nombre");
 		this.lbingresa.setFont(new Font("Impact", Font.PLAIN, 30));
 		this.lbingresa.setBounds(390,130,600,60);
@@ -955,11 +917,11 @@ public class MyVentana implements ActionListener{
 		this.btnName.setBounds(530,200,50,50);
 		this.btnName.setBackground(Color.RED);
 		this.btnName.addActionListener(this);
-
+		
 		this.lbPuntajeFinal = new JLabel(this.btk.getPuntos() + " puntos");
 		this.lbPuntajeFinal.setFont(new Font("Helvetica", Font.PLAIN, 50));
 		this.lbPuntajeFinal.setBounds(400,400,600,60);
-
+		
 		this.gameOver.add(btnName);
 		this.gameOver.add(tfName);
 		this.gameOver.add(lbingresa);
@@ -970,7 +932,7 @@ public class MyVentana implements ActionListener{
 	}
 	//Main ______________________________________________________________________________________________________________________________________________________________
 	public static void main(String[] args) {
-		MyVentana v = new MyVentana();
+		MyVentanaL v = new MyVentanaL();
 		v.crearVentana();
 	}
 
@@ -1028,7 +990,7 @@ public class MyVentana implements ActionListener{
 			this.dibujo.setVisible(true);
 			this.controles.setVisible(true);
 		}
-
+		
 		//Game Over
 		if(e.getSource() == this.btnName){
 			this.gameOver.setVisible(false);
@@ -1040,13 +1002,6 @@ public class MyVentana implements ActionListener{
 			this.segundos = 0;
 			this.minutos = 10;
 			this.lbTiempoNum.setText(formatoTiempo.format(minutos) + ":"+ formatoTiempo.format(segundos) + "."+ formatoTiempo.format(milisegundos));
-			this.nombreJugador = this.tfName.getText();
-			System.out.println("puntos: " + this.btk.getPuntos() + " name: " + this.tfName.getText() );
-			try {
-				this.setScores();
-			} catch (IOException e1) {
-				System.out.println("err--------------");
-			}
 		}
 
 		if(this.rbtnCentro.isSelected()){
