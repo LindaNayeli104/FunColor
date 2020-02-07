@@ -1,4 +1,5 @@
-
+//Linda Nayeli Abundis Lopez A01636416
+//Oscar Fernandez Moreno 	 A07013362
 public class MyHeap {
 
 	MyNodoHeap[] heap;
@@ -12,13 +13,12 @@ public class MyHeap {
 	public MyHeap(MyNodoHeap[] datos) {  
 		//hacer heapify
 		this.heap=datos;
-		this.size = datos.length;   //suponemos que siempre nos pasan el arreglo lleno
+		this.size = datos.length;   
 		heapify(heap);
 
 	}
 
-	private void heapify(MyNodoHeap[] datos) {                                 // padre: (pos-1)/2       hijo:  2 * pos + (left ? 1: 2)
-		//poner el arreglo con las condiciones de heap
+	private void heapify(MyNodoHeap[] datos) {                                 
 		int current = this.size / 2 - 1;
 		int left;
 		int right;
@@ -129,24 +129,10 @@ public class MyHeap {
 		
 		
 	}
-
-	public static void main(String[] args) {
-		
-		MyNodoHeap[] datos = new MyNodoHeap[7];
-		for (int i = 0; i < 7; i++) {
-			datos[i] = new MyNodoHeap(i+1, "LINDA" + i);
-		}
-		MyHeap heap_1 = new MyHeap(datos);
-		for (int i = 0; i < heap_1.size; i++) {
-			System.out.println(heap_1.heap[i].getScore());
-		}
-	
-
-	}
 }
 
 
-class MyNodoHeap <E extends Comparable<E>>{//<E extends Comparable<E>>
+class MyNodoHeap <E extends Comparable<E>>{
 
 	public String name;
 	public int score;
@@ -169,5 +155,3 @@ class MyNodoHeap <E extends Comparable<E>>{//<E extends Comparable<E>>
 	}
 	
 }
-
-

@@ -1,3 +1,6 @@
+//Linda Nayeli Abundis Lopez A01636416
+//Oscar Fernandez Moreno 	 A07013362
+
 import java.awt.Color;
 
 import javax.swing.JPanel;
